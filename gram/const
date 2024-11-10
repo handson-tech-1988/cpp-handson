@@ -1,0 +1,41 @@
+function:
+(__TEXT,__text) section
+__ZN1X3barEPNS_1AEi:
+0000000100000f60        pushq   %rbp                            ## Latency: 5
+0000000100000f61        movq    %rsp, %rbp
+0000000100000f64        xorl    %eax, %eax
+0000000100000f66        popq    %rbp                            ## Latency: 6
+0000000100000f67        retq
+0000000100000f68        nopl    (%rax,%rax)
+__ZN1X8call_pmfEPNS_1AEi:
+0000000100000f70        pushq   %rbp                            ## Latency: 5
+0000000100000f71        movq    %rsp, %rbp
+0000000100000f74        popq    %rbp                            ## Latency: 6
+0000000100000f75        jmp     __ZN1X1A3fooEi                  ## X::A::foo(int)
+0000000100000f7a        nopw    (%rax,%rax)
+__ZN1X1A3fooEi:
+0000000100000f80        pushq   %rbp                            ## Latency: 5
+0000000100000f81        movq    %rsp, %rbp
+0000000100000f84        xorl    %eax, %eax
+0000000100000f86        popq    %rbp                            ## Latency: 6
+0000000100000f87        retq
+0000000100000f88        nopl    (%rax,%rax)
+__ZN1X7call_pfEPNS_1AEi:
+0000000100000f90        pushq   %rbp                            ## Latency: 5
+0000000100000f91        movq    %rsp, %rbp
+0000000100000f94        xorl    %eax, %eax
+0000000100000f96        popq    %rbp                            ## Latency: 6
+0000000100000f97        retq
+0000000100000f98        nopl    (%rax,%rax)
+__ZN1X7call_diEPNS_1AEi:
+0000000100000fa0        pushq   %rbp                            ## Latency: 5
+0000000100000fa1        movq    %rsp, %rbp
+0000000100000fa4        popq    %rbp                            ## Latency: 6
+0000000100000fa5        jmp     __ZN1X1A3fooEi                  ## X::A::foo(int)
+0000000100000faa        nopw    (%rax,%rax)
+_main:
+0000000100000fb0        pushq   %rbp                            ## Latency: 5
+0000000100000fb1        movq    %rsp, %rbp
+0000000100000fb4        xorl    %eax, %eax
+0000000100000fb6        popq    %rbp                            ## Latency: 6
+0000000100000fb7        retq

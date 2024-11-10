@@ -1,0 +1,49 @@
+function:
+(__TEXT,__text) section
+__ZN1X3barEPNS_1AEi:
+0000000100000f20        pushq   %rbp                            ## Latency: 5
+0000000100000f21        movq    %rsp, %rbp
+0000000100000f24        xorl    %eax, %eax
+0000000100000f26        popq    %rbp                            ## Latency: 6
+0000000100000f27        retq
+0000000100000f28        nopl    (%rax,%rax)
+__ZN1X1A3fooEi:
+0000000100000f30        pushq   %rbp                            ## Latency: 5
+0000000100000f31        movq    %rsp, %rbp
+0000000100000f34        xorl    %eax, %eax
+0000000100000f36        popq    %rbp                            ## Latency: 6
+0000000100000f37        retq
+0000000100000f38        nopl    (%rax,%rax)
+__ZN1X8call_pmfEPNS_1AEi:
+0000000100000f40        pushq   %rbp                            ## Latency: 5
+0000000100000f41        movq    %rsp, %rbp
+0000000100000f44        movq    __ZN1X3pmfE(%rip), %rax         ## X::pmf
+                                        ## Latency: 5
+0000000100000f4b        addq    0xce(%rip), %rdi                ## Latency: 6
+0000000100000f52        testb   $0x1, %al
+0000000100000f54        je      0x100000f5e
+0000000100000f56        movq    (%rdi), %rcx                    ## Latency: 5
+0000000100000f59        movq    -0x1(%rcx,%rax), %rax           ## Latency: 5
+0000000100000f5e        popq    %rbp                            ## Latency: 6
+0000000100000f5f        jmpq    *%rax
+0000000100000f61        nopw    %cs:(%rax,%rax)
+__ZN1X7call_pfEPNS_1AEi:
+0000000100000f70        pushq   %rbp                            ## Latency: 5
+0000000100000f71        movq    %rsp, %rbp
+0000000100000f74        movq    __ZN1X2pfE(%rip), %rax          ## X::pf
+                                        ## Latency: 5
+0000000100000f7b        popq    %rbp                            ## Latency: 6
+0000000100000f7c        jmpq    *%rax
+0000000100000f7e        nop
+__ZN1X7call_diEPNS_1AEi:
+0000000100000f80        pushq   %rbp                            ## Latency: 5
+0000000100000f81        movq    %rsp, %rbp
+0000000100000f84        popq    %rbp                            ## Latency: 6
+0000000100000f85        jmp     0x100000f98                     ## symbol stub for: __ZN1X1A3fooEi
+0000000100000f8a        nopw    (%rax,%rax)
+_main:
+0000000100000f90        pushq   %rbp                            ## Latency: 5
+0000000100000f91        movq    %rsp, %rbp
+0000000100000f94        xorl    %eax, %eax
+0000000100000f96        popq    %rbp                            ## Latency: 6
+0000000100000f97        retq
