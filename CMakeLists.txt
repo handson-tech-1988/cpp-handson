@@ -15,6 +15,6 @@ else()
     message(WARNING "AVX2 not supported by the compiler")
 endif()
 
-add_executable(cpp_hands storage/version_comparator.cc generic/VariantVisit.cc generic/VariantVisit.h alg_kernel/simd.cc alg_kernel/simd.h)
+add_executable(cpp_hands storage/version_comparator.cc generic/VariantVisit.cc generic/VariantVisit.h deep_kernel/simd.cc deep_kernel/simd.h)
 
 # add_executable(cpp_hands sys_kernel/my_ptr.h sys_kernel/hash_map.h)
