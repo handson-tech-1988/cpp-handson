@@ -20,21 +20,48 @@ void load_fp16_to_fp32_avx2(const std::vector<float>& input, float_vec& reg) {
     reg = _mm256_loadu_ps(input.data());  // 将 FP32 数据加载到 AVX2 寄存器
 }
 
+void print(float* data) {
+    std::cout << "Sum pooling result: ";
+    for (int i = 0; i < 8; i++ ) {
+        std::cout << data[i] << " ";
+    }
+    std::cout << " ; " << std::endl;
+}
+
+// 将 FP16 数据转换为 FP32 并加载到 AVX2 寄存器
+void load_fp16_to_fp32_avx2_2(const std::vector<float>& input, float_vec& reg) {
+    reg = _mm256_loadu_ps(input.data() + 8);  // 将 FP32 数据加载到 AVX2 寄存器
+}
+
 // 执行 sum pooling 操作：将 4x4 区域的元素相加
 float sum_pooling_fp16(const std::vector<float>& input) {
     float_vec reg;  // 用来存储 AVX2 寄存器
     load_fp16_to_fp32_avx2(input, reg);  // 加载 FP32 数据到寄存器中
 
+    float_vec reg2;  // 用来存储 AVX2 寄存器
+    load_fp16_to_fp32_avx2_2(input, reg2);  // 加载 FP32 数据到寄存器中
+
+    float result[8];
+
     // 对 AVX2 中的 8 个 FP32 元素求和
     __m256 sum_result = _mm256_setzero_ps();  // 初始化结果寄存器为零
     sum_result = _mm256_add_ps(sum_result, reg);  // 将 8 个 FP32 元素加和
+    _mm256_storeu_ps(result, sum_result);
+    print(result);
+
+    __m256 tmp = _mm256_setzero_ps();
 
     // 进行水平加法，将 8 个元素合并成一个结果
-    sum_result = _mm256_hadd_ps(sum_result, sum_result);  // 两两加和
-    sum_result = _mm256_hadd_ps(sum_result, sum_result);  // 再两两加和
+    sum_result = _mm256_hadd_ps(sum_result, reg2);  // 两两加和 [8, 2] => [4 * 2, 2] => [2 * 2, 2] => [2, 2, 2]
+    _mm256_storeu_ps(result, sum_result);
+    print(result);
+
+
+    sum_result = _mm256_hadd_ps(sum_result, tmp);  // 再两两加和
+    _mm256_storeu_ps(result, sum_result);
+    print(result);
 
     // 从寄存器中提取结果
-    float result[8];
     _mm256_storeu_ps(result, sum_result);  // 存储求和结果到数组
 
     // 返回求和结果
