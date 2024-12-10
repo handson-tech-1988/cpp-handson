@@ -72,23 +72,23 @@ float sum_pooling_fp16(const std::vector<float>& input) {
     return sum;
 }
 
-int main() {
-    // 假设我们有一个 4x4 的 FP16 数据块（存储为 FP32）
-    std::vector<float> input = {
-            1.0f, 2.0f, 3.0f, 4.0f,
-            5.0f, 6.0f, 7.0f, 8.0f,
-            9.0f, 10.0f, 11.0f, 12.0f,
-            13.0f, 14.0f, 15.0f, 16.0f
-    };
-
-    // 执行 sum pooling 操作
-    float sum = sum_pooling_fp16(input);
-
-    // 输出求和结果
-    std::cout << "Sum pooling result: " << sum << std::endl; // expected = 136, actual = 144 => bug
-
-    return 0;
-}
+//int main() {
+//    // 假设我们有一个 4x4 的 FP16 数据块（存储为 FP32）
+//    std::vector<float> input = {
+//            1.0f, 2.0f, 3.0f, 4.0f,
+//            5.0f, 6.0f, 7.0f, 8.0f,
+//            9.0f, 10.0f, 11.0f, 12.0f,
+//            13.0f, 14.0f, 15.0f, 16.0f
+//    };
+//
+//    // 执行 sum pooling 操作
+//    float sum = sum_pooling_fp16(input);
+//
+//    // 输出求和结果
+//    std::cout << "Sum pooling result: " << sum << std::endl; // expected = 136, actual = 144 => bug
+//
+//    return 0;
+//}
 
 
 //int main(int argc, char **argv) {

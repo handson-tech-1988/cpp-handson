@@ -42,12 +42,12 @@ void Functors::call(B* a) {
     a->call();
 }
 
-struct Box { // 16/8
+struct Box { // 16[8]
     double a; // 8
     char b; // 1 + 7
 };
-class TEST{     // 24 / 8
-    Box b;      // 16 / 8
+class TEST{     // 24[8]
+    Box b;      // 16[8]
     char c;     // 1 + 7
 };
 
