@@ -80,7 +80,7 @@ public:
     }
 };
 
-int main(int argc, char *argv[]) {
+int main0(int argc, char *argv[]) {
     auto p = new Base();
     p->dumpConcreteFun();
     p->call();
